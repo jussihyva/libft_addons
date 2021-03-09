@@ -6,13 +6,13 @@
 /*   By: jkauppi <jkauppi@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 00:42:43 by jkauppi           #+#    #+#             */
-/*   Updated: 2021/03/10 01:08:49 by jkauppi          ###   ########.fr       */
+/*   Updated: 2021/03/10 01:23:00 by jkauppi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_addons.h"
 
-double ft_mod_int(int dividend, int divisor)
+int ft_mod_int(int dividend, int divisor)
 {
 	int		remainder;
 	int		t_divisor;
