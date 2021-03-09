@@ -6,7 +6,7 @@
 #    By: jkauppi <jkauppi@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/21 11:50:38 by jkauppi           #+#    #+#              #
-#    Updated: 2021/03/06 19:48:37 by jkauppi          ###   ########.fr        #
+#    Updated: 2021/03/10 00:42:08 by jkauppi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ CC				=	clang
 C_FLAGS			=	-std=gnu17 -g -Wall -Wextra -Werror $(INCLUDES)
 
 # C (Source code) and H (Header) files
-SRC_C_FILES		=	ft_radian.c ft_max_int.c
+SRC_C_FILES		=	ft_radian.c ft_max_int.c ft_min_int.c \
+					ft_mod_int.c ft_mod_double.c \
+					ft_matrix_x_vector_double.c
 SRC_H_FILES		=	libft_addons.h
 
 # Path folders for H, C, O and APP files
