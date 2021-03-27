@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mod_int.c                                       :+:      :+:    :+:   */
+/*   ft_isdigit_base.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkauppi <jkauppi@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 00:42:43 by jkauppi           #+#    #+#             */
-/*   Updated: 2021/03/22 15:58:53 by jkauppi          ###   ########.fr       */
+/*   Created: 2021/03/19 05:53:26 by jkauppi           #+#    #+#             */
+/*   Updated: 2021/03/19 08:44:03 by jkauppi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_addons.h"
 
-int		ft_mod_int(int dividend, int divisor)
+int			ft_isdigit_base(int c, int base)
 {
-	int		remainder;
-	int		t_divisor;
+	int		result;
 
-	remainder = dividend;
-	t_divisor = divisor < 0 ? -divisor : divisor;
-	if (remainder < 0)
+	errno = 0;
+	result = 0;
+	if (base <= 10)
 	{
-		while (remainder < 0)
-			remainder += t_divisor;
+		if ((c >= '0') && (c < '0' + base))
+			result = 1;
 	}
 	else
 	{
-		while (remainder >= t_divisor)
-			remainder -= t_divisor;
+		if (((c >= '0') && (c < '0' + base)) ||
+			((c >= 'A') && (c < 'A' + base)) ||
+			((c >= 'a') && (c < 'a' + base)))
+			result = 1;
 	}
-	if (divisor < 0)
-		remainder = -remainder;
-	return (remainder);
+	return (result);
 }

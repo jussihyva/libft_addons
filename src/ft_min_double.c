@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mod_int.c                                       :+:      :+:    :+:   */
+/*   ft_min_double.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkauppi <jkauppi@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 00:42:43 by jkauppi           #+#    #+#             */
-/*   Updated: 2021/03/22 15:58:53 by jkauppi          ###   ########.fr       */
+/*   Created: 2021/03/17 18:50:35 by jkauppi           #+#    #+#             */
+/*   Updated: 2021/03/17 18:51:24 by jkauppi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_addons.h"
 
-int		ft_mod_int(int dividend, int divisor)
+double		ft_min_double(double nbr1, double nbr2)
 {
-	int		remainder;
-	int		t_divisor;
+	double		min;
 
-	remainder = dividend;
-	t_divisor = divisor < 0 ? -divisor : divisor;
-	if (remainder < 0)
-	{
-		while (remainder < 0)
-			remainder += t_divisor;
-	}
+	if (nbr1 < nbr2)
+		min = nbr1;
 	else
-	{
-		while (remainder >= t_divisor)
-			remainder -= t_divisor;
-	}
-	if (divisor < 0)
-		remainder = -remainder;
-	return (remainder);
+		min = nbr2;
+	return (min);
 }

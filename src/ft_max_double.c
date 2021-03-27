@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mod_int.c                                       :+:      :+:    :+:   */
+/*   ft_max_double.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkauppi <jkauppi@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 00:42:43 by jkauppi           #+#    #+#             */
-/*   Updated: 2021/03/22 15:58:53 by jkauppi          ###   ########.fr       */
+/*   Created: 2021/03/17 18:50:31 by jkauppi           #+#    #+#             */
+/*   Updated: 2021/03/17 18:53:34 by jkauppi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_addons.h"
 
-int		ft_mod_int(int dividend, int divisor)
+double		ft_max_double(double nbr1, double nbr2)
 {
-	int		remainder;
-	int		t_divisor;
+	double		max;
 
-	remainder = dividend;
-	t_divisor = divisor < 0 ? -divisor : divisor;
-	if (remainder < 0)
-	{
-		while (remainder < 0)
-			remainder += t_divisor;
-	}
+	if (nbr1 > nbr2)
+		max = nbr1;
 	else
-	{
-		while (remainder >= t_divisor)
-			remainder -= t_divisor;
-	}
-	if (divisor < 0)
-		remainder = -remainder;
-	return (remainder);
+		max = nbr2;
+	return (max);
 }

@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mod_int.c                                       :+:      :+:    :+:   */
+/*   ft_matrix_x_vector_double.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkauppi <jkauppi@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 00:42:43 by jkauppi           #+#    #+#             */
-/*   Updated: 2021/03/22 15:58:53 by jkauppi          ###   ########.fr       */
+/*   Created: 2021/03/09 19:31:54 by jkauppi           #+#    #+#             */
+/*   Updated: 2021/03/23 08:14:52 by jkauppi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_addons.h"
 
-int		ft_mod_int(int dividend, int divisor)
+void		ft_matrix_vector_double(t_matrix_size matrix_size,
+							double **matrix, double *vector, double *new_vector)
 {
-	int		remainder;
-	int		t_divisor;
+	size_t			i;
+	size_t			j;
 
-	remainder = dividend;
-	t_divisor = divisor < 0 ? -divisor : divisor;
-	if (remainder < 0)
+	i = -1;
+	while (++i < matrix_size.rows)
 	{
-		while (remainder < 0)
-			remainder += t_divisor;
+		new_vector[i] = 0;
+		j = -1;
+		while (++j < matrix_size.columns)
+			new_vector[i] += matrix[i][j] * vector[j];
 	}
-	else
-	{
-		while (remainder >= t_divisor)
-			remainder -= t_divisor;
-	}
-	if (divisor < 0)
-		remainder = -remainder;
-	return (remainder);
+	return ;
 }
