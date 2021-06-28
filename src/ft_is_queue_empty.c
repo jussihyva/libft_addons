@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mod_int.c                                       :+:      :+:    :+:   */
+/*   ft_is_queue_empty.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkauppi <jkauppi@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 00:42:43 by jkauppi           #+#    #+#             */
-/*   Updated: 2021/03/27 11:09:43 by jkauppi          ###   ########.fr       */
+/*   Created: 2021/04/12 11:15:00 by jkauppi           #+#    #+#             */
+/*   Updated: 2021/04/12 11:18:41 by jkauppi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_addons.h"
 
-int	ft_mod_int(int dividend, int divisor)
+int	ft_is_queue_empty(t_queue *queue)
 {
-	int		remainder;
-	int		t_divisor;
+	int		is_queue_empty;
 
-	remainder = dividend;
-	if (divisor < 0)
-		t_divisor = -divisor;
-	else
-		t_divisor = divisor;
-	if (remainder < 0)
-	{
-		while (remainder < 0)
-			remainder += t_divisor;
-	}
-	else
-	{
-		while (remainder >= t_divisor)
-			remainder -= t_divisor;
-	}
-	if (divisor < 0)
-		remainder = -remainder;
-	return (remainder);
+	is_queue_empty = 0;
+	if (!*queue->in_stack && !*queue->out_stack)
+		is_queue_empty = 1;
+	return (is_queue_empty);
 }

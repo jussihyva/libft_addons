@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mod_int.c                                       :+:      :+:    :+:   */
+/*   ft_dequeue.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkauppi <jkauppi@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 00:42:43 by jkauppi           #+#    #+#             */
-/*   Updated: 2021/03/27 11:09:43 by jkauppi          ###   ########.fr       */
+/*   Created: 2021/04/12 08:53:18 by jkauppi           #+#    #+#             */
+/*   Updated: 2021/05/11 15:12:02 by jkauppi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_addons.h"
 
-int	ft_mod_int(int dividend, int divisor)
+void	*ft_dequeue(t_queue *queue)
 {
-	int		remainder;
-	int		t_divisor;
+	void	*data;
 
-	remainder = dividend;
-	if (divisor < 0)
-		t_divisor = -divisor;
-	else
-		t_divisor = divisor;
-	if (remainder < 0)
+	data = NULL;
+	if (!*queue->out_stack)
 	{
-		while (remainder < 0)
-			remainder += t_divisor;
+		while (*queue->in_stack)
+		{
+			data = ft_stack_pop(queue->in_stack);
+			ft_stack_push(queue->out_stack, data);
+		}
 	}
-	else
-	{
-		while (remainder >= t_divisor)
-			remainder -= t_divisor;
-	}
-	if (divisor < 0)
-		remainder = -remainder;
-	return (remainder);
+	data = ft_stack_pop(queue->out_stack);
+	return (data);
 }

@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mod_int.c                                       :+:      :+:    :+:   */
+/*   ft_open_fd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkauppi <jkauppi@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 00:42:43 by jkauppi           #+#    #+#             */
-/*   Updated: 2021/03/27 11:09:43 by jkauppi          ###   ########.fr       */
+/*   Created: 2021/06/03 17:18:39 by jkauppi           #+#    #+#             */
+/*   Updated: 2021/06/03 17:34:18 by jkauppi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_addons.h"
 
-int	ft_mod_int(int dividend, int divisor)
+int	ft_open_fd(char *file_path)
 {
-	int		remainder;
-	int		t_divisor;
+	int		fd;
 
-	remainder = dividend;
-	if (divisor < 0)
-		t_divisor = -divisor;
-	else
-		t_divisor = divisor;
-	if (remainder < 0)
+	fd = 0;
+	if (file_path)
 	{
-		while (remainder < 0)
-			remainder += t_divisor;
+		fd = open(file_path, O_RDONLY);
+		if (fd == -1)
+		{
+			FT_LOG_ERROR("%s (%s) failed! errno=%d. %s: %s",
+				"Opening of a file", file_path, errno, "Detail info",
+				strerror(errno));
+			exit(42);
+		}
 	}
-	else
-	{
-		while (remainder >= t_divisor)
-			remainder -= t_divisor;
-	}
-	if (divisor < 0)
-		remainder = -remainder;
-	return (remainder);
+	return (fd);
 }

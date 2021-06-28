@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mod_int.c                                       :+:      :+:    :+:   */
+/*   ft_openssl_init_client.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkauppi <jkauppi@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/10 00:42:43 by jkauppi           #+#    #+#             */
-/*   Updated: 2021/03/27 11:09:43 by jkauppi          ###   ########.fr       */
+/*   Created: 2021/04/01 16:20:56 by jkauppi           #+#    #+#             */
+/*   Updated: 2021/04/01 16:26:37 by jkauppi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_addons.h"
 
-int	ft_mod_int(int dividend, int divisor)
+SSL_CTX	*ft_openssl_init_client(char *pem_cert_file,
+									char *pem_private_key_file, int *socket_fd)
 {
-	int		remainder;
-	int		t_divisor;
+	SSL_CTX				*ctx;
+	const SSL_METHOD	*tls_method;
 
-	remainder = dividend;
-	if (divisor < 0)
-		t_divisor = -divisor;
-	else
-		t_divisor = divisor;
-	if (remainder < 0)
+	*socket_fd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	if (*socket_fd != -1)
 	{
-		while (remainder < 0)
-			remainder += t_divisor;
+		tls_method = TLS_client_method();
+		ctx = ft_openssl_init_ctx(tls_method, pem_cert_file,
+				pem_private_key_file);
+		if (!ctx)
+			close(*socket_fd);
 	}
 	else
-	{
-		while (remainder >= t_divisor)
-			remainder -= t_divisor;
-	}
-	if (divisor < 0)
-		remainder = -remainder;
-	return (remainder);
+		ctx = NULL;
+	return (ctx);
 }
