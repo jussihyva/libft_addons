@@ -6,7 +6,7 @@
 /*   By: jkauppi <jkauppi@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 14:53:13 by jkauppi           #+#    #+#             */
-/*   Updated: 2021/08/12 13:46:09 by jkauppi          ###   ########.fr       */
+/*   Updated: 2021/08/20 17:57:32 by jkauppi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ typedef enum e_cmd_param_type
 
 typedef struct s_argc_argv
 {
-	int		argc;
-	char	**argv;
+	const int	*argc;
+	const char	***argv;
+	int			i;
 }				t_argc_argv;
 
 typedef struct s_event_logging_data
@@ -258,8 +259,8 @@ void					*ft_prio_dequeue(t_bt_node **states_prio_queue);
 void					ft_print_memory(const void *addr, size_t size);
 int						ft_open_fd(char *file_path);
 void					ft_arg_parser(t_arg_parser *arg_parser);
-t_loging_level			ft_logging_level_param_validate(char *next_arg);
-void					ft_print_leaks(void);
+t_loging_level			ft_logging_level_param_validate(const char *level_str);
+void					ft_print_leaks(const char *prog_name);
 void					ft_strarraydel(char ***array);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: jkauppi <jkauppi@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/21 11:50:38 by jkauppi           #+#    #+#              #
-#    Updated: 2021/08/12 13:45:17 by jkauppi          ###   ########.fr        #
+#    Updated: 2021/08/20 11:18:06 by jkauppi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ OS				=	$(shell uname -s)
 ifeq ($(OS), Darwin)
 	D_ATTRIBUTES	=	-D DARWIN
 	MAC_INCLUDES	=	-I $(HOME)/.brew/Cellar/openssl@1.1/1.1.1k/include
+	MAC_INCLUDES	+=	-I $(HOME)/.brew/Cellar/openssl@1.1/1.1.1k/include
 endif
 
 NAME			=	libft_addons.a
@@ -97,7 +98,7 @@ re: fclean all
 .PHONY: norm
 norm:
 ifeq ($(OS), Darwin)
-	norminette-beta $(SRC)/* $(INCLUDE)/*
+	norminette-beta
 else
-	norminette $(SRC)/* $(INCLUDE)/*
+	norminette
 endif

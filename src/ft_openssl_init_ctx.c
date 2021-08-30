@@ -6,7 +6,7 @@
 /*   By: jkauppi <jkauppi@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 16:18:55 by jkauppi           #+#    #+#             */
-/*   Updated: 2021/06/11 10:54:30 by jkauppi          ###   ########.fr       */
+/*   Updated: 2021/08/19 19:19:06 by jkauppi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ SSL_CTX	*ft_openssl_init_ctx(const SSL_METHOD *tls_method, char *pem_cert_file,
 	{
 		ERR_print_errors_fp(stderr);
 		SSL_CTX_free(ctx);
-		FT_LOG_FATAL("Error setting up connection to INFLUXDB\n");
 		ctx = NULL;
 	}
 	return (ctx);

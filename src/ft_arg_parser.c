@@ -6,7 +6,7 @@
 /*   By: jkauppi <jkauppi@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 17:42:28 by jkauppi           #+#    #+#             */
-/*   Updated: 2021/08/04 18:22:34 by jkauppi          ###   ########.fr       */
+/*   Updated: 2021/08/20 13:59:43 by jkauppi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,9 @@ static int	pre_analyse_argument(char *options, char arg,
 	{
 		if (*(opt_ptr + 1) == ':')
 		{
-			if (argc_argv->argc < 2)
+			if ((*argc_argv->argc - argc_argv->i) < 2)
 				param_error("Missing argument for parameter: -%c", arg);
-			argc_argv->argc--;
-			argc_argv->argv++;
+			argc_argv->i++;
 		}
 		result = 1;
 	}
@@ -48,10 +47,10 @@ static void	split_cmd_argument(t_arg_parser *arg_parser,
 							t_cmd_param_type cmd_param_type)
 {
 	t_save_cmd_argument		fn_save_cmd_argument;
-	char					*arg;
+	const char				*arg;
 
 	fn_save_cmd_argument = arg_parser->fn_save_cmd_argument;
-	arg = *argc_argv->argv;
+	arg = (*argc_argv->argv)[argc_argv->i];
 	if (cmd_param_type == E_OPTIONAL_SHORT)
 	{
 		while (*(++arg))
@@ -76,22 +75,19 @@ static void	split_cmd_argument(t_arg_parser *arg_parser,
 
 void	ft_arg_parser(t_arg_parser *arg_parser)
 {
-	int						arg_index;
 	t_cmd_param_type		cmd_param_type;
 	t_argc_argv				*argc_argv;
+	const char				*arg;
 
 	argc_argv = &arg_parser->argc_argv;
 	arg_parser->input_params
-		= (void *)arg_parser->fn_initialize_cmd_args(&arg_parser->argc_argv);
-	arg_index = 0;
-	while (--argc_argv->argc)
+		= (void *)arg_parser->fn_initialize_cmd_args(argc_argv);
+	while (++argc_argv->i < *argc_argv->argc)
 	{
-		argc_argv->argv++;
-		if (ft_strlen(*argc_argv->argv) > 2
-			&& (*argc_argv->argv)[0] == '-' && (*argc_argv->argv)[1] == '-')
+		arg = (*argc_argv->argv)[argc_argv->i];
+		if (ft_strlen(arg) > 2 && arg[0] == '-' && arg[1] == '-')
 			cmd_param_type = E_OPTIONAL_LONG;
-		else if (ft_strlen(*argc_argv->argv) > 1
-			&& (*argc_argv->argv)[0] == '-')
+		else if (ft_strlen(arg) > 1 && arg[0] == '-')
 			cmd_param_type = E_OPTIONAL_SHORT;
 		else
 			cmd_param_type = E_MANDATORY;

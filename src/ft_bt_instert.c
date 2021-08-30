@@ -6,7 +6,7 @@
 /*   By: jkauppi <jkauppi@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 13:32:44 by jkauppi           #+#    #+#             */
-/*   Updated: 2021/05/12 05:31:01 by jkauppi          ###   ########.fr       */
+/*   Updated: 2021/08/19 19:16:41 by jkauppi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ void	ft_bt_instert(t_bt_key *bt_key, t_bt_data *bt_data, t_bt_node **bt_root)
 	t_bt_elem		bt_elem;
 	t_bt_node		*parent;
 
-	FT_LOG_DEBUG("New key: %#lx", *(unsigned long *)bt_key->key);
 	ft_bzero(&bt_elem, sizeof(bt_elem));
 	if (!(*bt_root))
 	{
