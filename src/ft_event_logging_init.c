@@ -6,7 +6,7 @@
 /*   By: jkauppi <jkauppi@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 10:05:53 by jkauppi           #+#    #+#             */
-/*   Updated: 2021/07/20 09:40:13 by jkauppi          ###   ########.fr       */
+/*   Updated: 2021/09/06 11:17:12 by jkauppi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,21 @@ static void	set_level_colors(const char **level_colors)
 	return ;
 }
 
-t_event_logging_data	*ft_event_logging_init(t_loging_level event_type)
+t_logging_data	*ft_event_logging_init(t_logging_level logging_level)
 {
-	t_event_logging_data	*event_logging_data;
+	t_logging_data	*logging_data;
 
-	event_logging_data
-		= (t_event_logging_data *)ft_memalloc(sizeof(*event_logging_data));
-	event_logging_data->level_strings = (const char **)ft_memalloc(
-			sizeof(*event_logging_data->level_strings) * 6);
-	event_logging_data->level_colors = (const char **)ft_memalloc(
-			sizeof(*event_logging_data->level_strings) * 6);
-	set_level_colors(event_logging_data->level_colors);
-	set_level_strings(event_logging_data->level_strings);
-	ft_log_set_params(event_logging_data->level_strings,
-		event_logging_data->level_colors);
-	ft_log_set_level(event_type);
-	return (event_logging_data);
+	logging_data = ft_memalloc(sizeof(*logging_data));
+	logging_data->level_strings = (const char **)ft_memalloc(
+			sizeof(*logging_data->level_strings) * 6);
+	logging_data->level_colors = (const char **)ft_memalloc(
+			sizeof(*logging_data->level_strings) * 6);
+	set_level_colors(logging_data->level_colors);
+	set_level_strings(logging_data->level_strings);
+	ft_logging_params_set(logging_data->level_strings,
+		logging_data->level_colors);
+	ft_log_set_level(logging_level);
+	return (logging_data);
 }
 
 /**

@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strarraydel.c                                   :+:      :+:    :+:   */
+/*   ft_home_dir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkauppi <jkauppi@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/12 13:47:00 by jkauppi           #+#    #+#             */
-/*   Updated: 2021/09/08 17:53:07 by jkauppi          ###   ########.fr       */
+/*   Created: 2021/09/07 14:01:42 by jkauppi           #+#    #+#             */
+/*   Updated: 2021/09/07 14:02:58 by jkauppi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_addons.h"
 
-void	ft_strarraydel(const char ***const array)
+const char	*ft_home_dir(void)
 {
-	const char	*ptr;
-	size_t		i;
+	struct passwd	*pw;
+	const char		*homedir;
 
-	i = 0;
-	while ((*array)[i])
-	{
-		ptr = (*array)[i];
-		ft_strdel((char **)&ptr);
-		i++;
-	}
-	ft_memdel((void **)array);
-	return ;
+	pw = getpwuid(getuid());
+	homedir = pw->pw_dir;
+	return (homedir);
 }

@@ -6,13 +6,13 @@
 /*   By: jkauppi <jkauppi@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 17:18:39 by jkauppi           #+#    #+#             */
-/*   Updated: 2021/08/19 19:18:26 by jkauppi          ###   ########.fr       */
+/*   Updated: 2021/09/02 17:52:27 by jkauppi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_addons.h"
 
-int	ft_open_fd(char *file_path)
+int	ft_open_fd(const char *const file_path)
 {
 	int		fd;
 

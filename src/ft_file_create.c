@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strarraydel.c                                   :+:      :+:    :+:   */
+/*   ft_file_create.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkauppi <jkauppi@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/12 13:47:00 by jkauppi           #+#    #+#             */
-/*   Updated: 2021/09/08 17:53:07 by jkauppi          ###   ########.fr       */
+/*   Created: 2021/09/07 13:27:14 by jkauppi           #+#    #+#             */
+/*   Updated: 2021/09/07 13:29:38 by jkauppi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_addons.h"
 
-void	ft_strarraydel(const char ***const array)
+char	*ft_file_create(
+					const char *const folder,
+					const char *const file_name)
 {
-	const char	*ptr;
-	size_t		i;
+	char			*file_path;
+	size_t			str_len;
 
-	i = 0;
-	while ((*array)[i])
-	{
-		ptr = (*array)[i];
-		ft_strdel((char **)&ptr);
-		i++;
-	}
-	ft_memdel((void **)array);
-	return ;
+	str_len = ft_strlen(folder) + 1 + ft_strlen(file_name);
+	file_path = ft_memalloc(sizeof(*file_path) * (str_len + 1));
+	ft_strcat(file_path, folder);
+	ft_strcat(file_path, "/");
+	ft_strcat(file_path, file_name);
+	return (file_path);
 }

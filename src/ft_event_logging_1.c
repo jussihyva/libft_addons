@@ -6,37 +6,40 @@
 /*   By: jkauppi <jkauppi@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 10:22:34 by jkauppi           #+#    #+#             */
-/*   Updated: 2021/07/13 10:30:08 by jkauppi          ###   ########.fr       */
+/*   Updated: 2021/09/06 10:21:32 by jkauppi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_addons.h"
 
-static t_loging_params		*g_loging_params;
+static t_logging_params		*g_logging_params;
 
-void	ft_log_set_params(const char **level_strings, const char **level_colors)
+void	ft_logging_params_set(
+						const char **level_strings,
+						const char **level_colors)
 {
-	g_loging_params = (t_loging_params *)ft_memalloc(sizeof(*g_loging_params));
-	g_loging_params->level_strings = level_strings;
-	g_loging_params->level_colors = level_colors;
-	set_g_loging_params_2(g_loging_params);
-	set_g_loging_params_3(g_loging_params);
-	set_g_loging_params_4(g_loging_params);
-	set_g_loging_params_5(g_loging_params);
+	g_logging_params
+		= (t_logging_params *)ft_memalloc(sizeof(*g_logging_params));
+	g_logging_params->level_strings = level_strings;
+	g_logging_params->level_colors = level_colors;
+	logging_params_2_set(g_logging_params);
+	logging_params_3_set(g_logging_params);
+	logging_params_4_set(g_logging_params);
+	logging_params_5_set(g_logging_params);
 	return ;
 }
 
-void	ft_release_loging_params(void)
+void	ft_logging_params_release(void)
 {
 	int		i;
 
 	i = -1;
-	while (++i < MAX_LOGING_EXTENSIONS)
+	while (++i < MAX_LOGGING_EXTENSIONS)
 	{
-		if (g_loging_params->loging_extensions[i])
-			ft_memdel((void **)&g_loging_params->loging_extensions[i]);
+		if (g_logging_params->logging_extensions[i])
+			ft_memdel((void **)&g_logging_params->logging_extensions[i]);
 	}
-	ft_memdel((void **)&g_loging_params);
+	ft_memdel((void **)&g_logging_params);
 	return ;
 }
 
@@ -50,13 +53,13 @@ void	ft_log_debug(const char *file, const int line, const char *fmt, ...)
 	event.level = LOG_DEBUG;
 	gettimeofday(&event.tv, NULL);
 	lock();
-	if (!g_loging_params->quiet && event.level >= g_loging_params->level)
+	if (!g_logging_params->quiet && event.level >= g_logging_params->level)
 	{
 		va_start(event.ap, fmt);
 		stdout_callback(&event);
 		va_end(event.ap);
 	}
-	execute_login_extensions(&event, fmt);
+	execute_logging_extensions(&event, fmt);
 	unlock();
 	return ;
 }
@@ -71,13 +74,13 @@ void	ft_log_info(const char *file, const int line, const char *fmt, ...)
 	event.level = LOG_INFO;
 	gettimeofday(&event.tv, NULL);
 	lock();
-	if (!g_loging_params->quiet && event.level >= g_loging_params->level)
+	if (!g_logging_params->quiet && event.level >= g_logging_params->level)
 	{
 		va_start(event.ap, fmt);
 		stdout_callback(&event);
 		va_end(event.ap);
 	}
-	execute_login_extensions(&event, fmt);
+	execute_logging_extensions(&event, fmt);
 	unlock();
 	return ;
 }
@@ -92,13 +95,13 @@ void	ft_log_warn(const char *file, const int line, const char *fmt, ...)
 	event.level = LOG_WARN;
 	gettimeofday(&event.tv, NULL);
 	lock();
-	if (!g_loging_params->quiet && event.level >= g_loging_params->level)
+	if (!g_logging_params->quiet && event.level >= g_logging_params->level)
 	{
 		va_start(event.ap, fmt);
 		stdout_callback(&event);
 		va_end(event.ap);
 	}
-	execute_login_extensions(&event, fmt);
+	execute_logging_extensions(&event, fmt);
 	unlock();
 	return ;
 }
